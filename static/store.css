@@ -1,0 +1,118 @@
+.items{
+    margin-bottom: 50px;
+}
+.slide {
+    /* border: 2px solid black; */
+    height: 200px;
+    
+}
+
+.slide div {
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.category {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.container3 {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.view {
+    display: inline-block;
+    position:absolute;
+    right: 10%;
+    font-weight:bold;
+    font-size: 20px;
+    justify-content: center;
+    margin-top: 10px;
+
+
+    height: 2.4rem;
+    width: 6.5rem;
+    padding: 0 0 1rem;
+    border-radius: 16px;
+    text-indent: 0.3rem;
+
+    background-color: #1F8A70;
+    color: white;
+    padding: 0.3rem 0 0rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(255, 99, 71, 0.4);
+}
+
+
+.slick-prev:before,
+.slick-next:before {
+    color: red;
+}
+
+.slick-slide {
+    margin: 0px 10px;
+}
+
+
+
+/* .container2 {
+    margin: 0;
+    padding: 2% 15% 2%;
+    background-color: #A084E8;
+}
+
+.btn2 {
+    border: 0;
+    background-color: #FFD700;
+    box-shadow: 0 4px 6px rgba(218, 165, 32, 0.2), 0 6px 20px rgba(218, 165, 32, 0.1);
+    transition: box-shadow 0.1s ease-in-out;
+}
+
+.btn2:hover {
+    box-shadow: 0 10px 14px rgba(218, 165, 32, 0.6), 0 8px 30px rgba(218, 165, 32, 0.4);
+} */
+
+.view a {
+    color: #FFBF9B;
+    text-decoration: none;
+}
+
+.slide > div:first-child {
+    background-color: #FFC0CB;
+}
+
+.slide > div:not(:first-child) {
+    background-color: #ADD8E6  ;
+}
+
+.item {
+    background-color: #FF6347;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(255, 99, 71, 0.4);
+
+    height: 1.5rem;
+    width: 5rem;
+    padding: 0 0 1rem;
+    border-radius: 16px;
+    text-indent: 0.3rem;
+}
+  
+.item:hover {
+    box-shadow: 0 0 4px 6px rgba(255, 99, 71, 0.4);
+}

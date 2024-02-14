@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+</head>
+<body>
+    {% if u==1 %}
+        <h1 class="sph1">Manager Details</h1>
+    {% elif u==2%}
+        <h1 class="sph1">Customer Details</h1>
+    {% endif %}
+    <div class="center">
+        <table class="table" style="font-size: 17px;">
+            <thead></thead>
+            <tbody>
+                <tr>
+                {% if u==1 %}
+                    <td class="color"><strong>M_ID:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.m_id }}</td>
+                {% elif u==2 %}
+                    <td class="color"><strong>C_ID:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.c_id }}</td><td></td>
+                    <td class="color"><strong>Username:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.username }}</td>
+                {% endif %}
+                </tr>
+                <tr>
+                    <td class="color"><strong>First Name:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.f_name }}</td><td></td>
+                    <td class="color"><strong>Last Name:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.l_name }}</td>
+                </tr>
+                <tr>
+                    <td class="color"><strong>Gender:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.gender }}</td><td></td>
+                    <td class="color"><strong>DOB:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.dob }}</td>
+                </tr>
+                <tr>
+                    <td class="color"><strong>Email:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.email }}</td><td></td>
+                    <td class="color"><strong>Mobile:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.mobile }}</td>
+                </tr>
+                <tr>
+                    <td class="color"><strong>Password:</strong></td>
+                    {% if e==1 %}
+                        {% if u == 1 %}
+                        <form action= "/Manager/{{ code }}/Profile/update" name="form" onsubmit="return validatePassword(name)" method="POST">
+                        {% elif u==2 %}
+                        <form action= "/Member/{{ code }}/Profile/update" name="form" onsubmit="return validatePassword(name)" method="POST">
+                        {% endif %}
+                            <td><input type="text" name="fpass" value="{{ person.password }}"></td>
+                            <td></td><td><input type="submit" value="Save" class="btn3"></td>
+                            </td><td><div id="pass"><b><span class="formerror" style="font-size: small;"></span></b></div></td>
+                        </form>
+                    {% else %}
+                        <td style="background-color: rgb(247, 215, 177);">{{ person.password }}</td>
+                        {% if u == 1 %}
+                            <td></td><td><button class="btn3" onclick="window.location.href = '/Manager/{{ code }}/Profile/update'">Change</button></td>
+                        {% elif u==2 %}
+                            <td></td><td><button class="btn3" onclick="window.location.href = '/Member/{{ code }}/Profile/update'">Change</button></td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                
+                {% if u==2 or u==3 %}
+                <tr class="color"><td><strong>No of purchase:</strong></td><td style="background-color: rgb(247, 215, 177);">{{ person.no_purchase }}</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    
+
+    <div class="center" style="margin: 3%;">
+        {% if e==0 %}
+            {% if u==1 %}
+                <button class="btn2" onclick="window.location.href = '/Manager/{{ code }}/Dashboard'">Go Back</button>
+            {% elif u==2 %}
+                <button onclick="window.location.href = '/Member/{{ code }}/History'">Purchase History</button>
+                <form action="/Member/{{ code }}/Store" name="id" method="post">
+                    <input type="hidden" name="id" value="1">
+                    <div class="center"><button type="submit">Go to Store</button></div>
+                </form>
+            {% endif %}
+        {% else %}
+            {% if u==1 %}
+                <button class="btn2" onclick="window.location.href = '/Manager/{{ code }}/Profile'">Go Back</button>
+            {% elif u==2 %}
+                <button class="btn2" onclick="window.location.href = '/Member/{{ code }}/Profile'">Go Back</button>
+            {% endif %}
+        {% endif %}
+    </div>
+    
+
+    <script src="{{ url_for('static', filename='validateForm.js')}}"></script>
+</body>
+</html>

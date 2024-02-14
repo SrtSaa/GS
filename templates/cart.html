@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='search.css')}}">
+</head>
+
+<body>
+    <div class="container4">
+        <div class="box2" style="text-align: center;">
+            <h1 style="color: rgb(1, 136, 220);"><strong>My Cart</strong></h1>
+        </div>
+    </div>
+
+    {% if items|length != 0 %}
+    <div id="middle">
+        <div>
+            <div class="center">
+                <table class="table">
+                    <thead class="color">
+                        <th>Item Name</th>
+                        <th>Mfg Date</th>
+                        <th>Exp Date</th>
+                        <th>Price (in rupees)</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody class="color2">
+                        {% for item in items %}
+                        {% if item.stock > 0 %}
+                        <tr class="item">
+                            <td>{{ item.i_name }}</td>
+                            <td>{{ item.mfg_date }}</td>
+                            <td>{{ item.exp_date }}</td>
+                            {% if item.stock < 15 %}
+                            <td style="text-align: right;" class="price">{{ item.price + 10 }}</td>
+                            {% else %}
+                            <td style="text-align: right;" class="price">{{ item.price }}</td>
+                            {% endif %}
+                            <td><input type="number" max="{{ item.stock }}" min="1" value="1" style="text-align: center; width: 50px;" class="quantity" onclick="updateCartTotal()"></td>
+                            <td><button class="removeItem btn3" id="{{ item.i_id }}" onclick="deleteItem(id)">Remove</button></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="container3">
+                <div class="box2" style="justify-content: right;"><strong>Total Price:</strong></div>
+                <div class="box2" style="justify-content: left;"><strong class="totalPrice"></strong></div>
+            </div>
+            <div class="container3">
+                <div class="box2">
+                    <form action="/Member/{{ code }}/Sell" name="buy" method="post">
+                        <input type="hidden" name="ids" id="ids">
+                        <input type="hidden" name="qty" id="qty">
+                        <button type="submit" onclick="purchase()" class="btn2">Buy</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="container3">
+        <div class="box2" style="text-align: center; color: red;">
+            <h3><strong>Cart is Empty</strong></h3>
+        </div>
+    </div>
+    {% endif %}
+    <div class="container3">
+        <div class="box2" style="justify-content: right;">
+            <form action="/Member/{{ code }}/Store" name="id" method="post">
+                <input type="hidden" name="id" value="1">
+                <div class="center"><button type="submit" onclick="addtoStorage()">Go to Store</button></div>
+            </form>
+        </div>
+        <div class="box2" style="justify-content: left;"><a href="/"><div class="center"><button onclick="clearStorage()">Cancel and Signout</button></div></a></div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='cart.js')}}"></script>
+</body>
+
+</html>

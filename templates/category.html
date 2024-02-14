@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if c == 1 %}
+        <title>Add Category</title>
+    {% elif c==0 %}
+        <title>Delete Category</title>
+    {% else %}
+        <title>Rename Category</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+</head>
+
+<body>
+    {% if c == 1 %}
+        <h1 class="sph1">Add Category</h1>
+        <div class="center">
+            <form action="/Manager/{{ code }}/Category/Add" name="form" onsubmit="return validateInput(name)" method="POST">
+                <span style="font-size: 25px;"><strong>Category Name:</strong></span>
+                <span><input type="text" name="cname" placeholder="Enter Category Name" style="font-size: 15px;" required></span>
+                <div id="cname" class="center"><b><span class="formerror"></span></b></div>
+                <br><br>
+                <div class="center"><div><button class="btn2" type="submit">Submit</button></div></div>
+            </form>
+        </div>
+        <div id="test" class="center"><b><div class="formerror" style="text-align: center;"></div></b></div>
+    {% elif c==0 %}
+        <h1 class="sph1">Delete Category</h1>
+        <div class="center">
+            <form action="/Manager/{{ code }}/Category/Delete" name="form" method="POST" onsubmit="return confirm('Do you want to purchase the item?\nIf you delete the Category, all items under this Category will get deleted.')">
+                <span  style="font-size: 25px;"><strong>Category Name:</strong></span>
+                <span>
+                    <select id="cid" name="cid" style="font-size: 15px;">
+                        {% for k in catgs %}
+                            <option value="{{ k.cat_id }}" style="background-color: rgb(215, 48, 241);">{{ k.cat_name }}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+                <br><br><br>
+                <div class="center"><div><button class="btn2" type="submit">Submit</button></div></div>
+            </form>
+        </div>
+    {% elif c==2 %}
+        <h1 class="sph1">Rename Category</h1>
+        <div class="center">
+            <form action="/Manager/{{ code }}/Category/Rename" name="form" method="POST">
+                <div>
+                    <span style="font-size: 25px;"><strong>Category Name:</strong></span>
+                    <span>
+                        <select id="cid" name="cid" style="font-size: 15px;">
+                            {% for k in catgs %}
+                                <option value="{{ k.cat_id }}" style="background-color: rgb(215, 48, 241);">{{ k.cat_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </span>
+                </div><br>
+                <div>
+                    <span style="font-size: 25px;"><strong>Enter New Name:</strong></span>
+                    <span><input type="text" name="cname" placeholder="Enter New Name" style="font-size: 15px;" required></span>
+                    <br><br><br>
+                    <div class="center"><div><button class="btn2" type="submit">Submit</button></div></div>
+                </div>
+            </form>
+        </div>
+        <div id="test" class="center"><b><div class="formerror" style="text-align: center;"></div></b></div>
+    {% endif %}
+
+    
+    <div class="center" style="margin: 3%;">
+            <button class="btn2" onclick="window.location.href = '/Manager/{{ code }}/Dashboard'">Go Back</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='manager.js')}}"></script>
+    {% if f == 1 %}
+    <script>seterror("test","Category Name Already Exists!<br><br>");</script>
+    {% endif %}
+</body>
+
+</html>

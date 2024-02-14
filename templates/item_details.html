@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+</head>
+
+<body>
+    <h1 class="sph1">Item Details</h1>
+    <div class="center">
+        <table class="table" style="font-size: 17px;">
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td class="color"><strong>I_ID:</strong></td>
+                    <td class="color2">{{ item.i_id }}</td><td></td>
+                    <td class="color"><strong>Item Name:</strong></td>
+                    <td class="color2">{{ item.i_name }}</td>
+                </tr>
+                <tr>
+                    <td class="color"><strong>Cat_ID:</strong></td>
+                    <td class="color2">{{ item.cat_id }}</td><td></td>
+                    <td class="color"><strong>Category Name:</strong></td>
+                    <td class="color2">{{ item.cat_name }}</td>
+                </tr>
+                <tr>
+                    <td class="color"><strong>Quantity:</strong></td>
+                    <td class="color2">{{ item.quantity }}</td><td></td>
+                    <td class="color"><strong>Unit:</strong></td>
+                    <td class="color2">{{ item.unit }}</td>
+                </tr>
+                <tr>
+                    <td class="color"><strong>Mfg Date:</strong></td>
+                    <td class="color2">{{ item.mfg_date }}</td><td></td>
+                    <td class="color"><strong>Exp Date:</strong></td>
+                    <td class="color2">{{ item.exp_date }}</td>
+                </tr>
+
+                {% if e==1 %}
+                    <form action="/Manager/{{ code }}/Inventory/{{ item.i_id }}/Update" name="form" method="POST">
+                        <tr>
+                            <td class="color"><strong>Stock:</strong></td>
+                            <td><input type="number" min="0" name="stock" value="{{ item.stock }}"></td><td></td>
+                            <td rowspan="2"><input type="submit" value="Save" class="btn3"></td>
+                        </tr>
+                        <tr>
+                            <td class="color"><strong>Price: </strong></td>
+                            <td><input type="number" min="0" name="price" value="{{ item.price }}"></td>
+                        </tr>
+                    </form>
+                {% else %}
+                    <tr>
+                        <td class="color"><strong>Stock:</strong></td>
+                        <td class="color2">{{ item.stock }}</td><td></td>
+                        <td rowspan="2"><button class="btn3" onclick="window.location.href = '/Manager/{{ code }}/Inventory/{{ item.i_id }}/Update'">Change</button></td>
+                    </tr>
+                    <tr>
+                        <td class="color"><strong>Price:</strong></td>
+                        <td class="color2">{{ item.price }} Rupees</td>
+                    </tr>
+                {% endif %}
+
+
+            </tbody>
+        </table>
+    </div>
+
+    {% if e==0 %}
+    <div class="center" style="margin: 3%;">
+        <a href="/Manager/{{ code }}/Inventory/{{ item.i_id }}/Delete"><button class="btn2" style="height: 30px;" onclick="return deleteItem()">Delete Item</button></a>
+    </div>
+    {% endif %}
+
+    <div class="center" style="margin: 3%;">
+        {% if e==0 %}
+            <button class="btn2" onclick="window.location.href = '/Manager/{{ code }}/Inventory'">Go Back</button>
+        {% else %}
+            <button class="btn2" onclick="window.location.href = '/Manager/{{ code }}/Inventory/{{ item.i_id }}/Details'">Go Back</button>
+        {% endif %}
+    </div>
+
+
+    <script src="{{ url_for('static', filename='manager.js')}}"></script>
+</body>
+
+</html>

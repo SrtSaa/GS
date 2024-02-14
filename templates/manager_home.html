@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dropdown.css')}}">
+    <style>
+        h1 {
+            text-align: center;
+            margin: 10%;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{name}}</h1>
+    <div class="container4">
+        <div class="center">
+            <div class="dropdown">
+                <button class="btn" onclick="window.location.href = '/Manager/{{ code }}/Inventory'">View Inventory</button></a>
+            </div>
+        </div>
+        <div class="center">
+            <div class="dropdown">
+                <button class="btn">Manage Inventory</button>
+                <div class="dropdown-content">
+                <a href="/Manager/{{ code }}/Category/Add">Add Category</a>
+                <a href="/Manager/{{ code }}/Category/Delete">Remove Category</a>
+                <a href="/Manager/{{ code }}/Category/Rename">Rename Category</a>
+                <a href="/Manager/{{ code }}/Inventory/Item/Add">Add Item</a>
+                <a href="/Manager/{{ code }}/Inventory">Remove Item</a>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="dropdown">
+                <button class="btn" onclick="window.location.href = '/Manager/{{ code }}/Summary'">Summary</button></a>
+            </div>
+        </div>
+        <div class="center">
+            <div class="dropdown">
+                <button class="btn" onclick="window.location.href = '/Manager/{{ code }}/Profile'">Profile</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="center"><button style="font-size: 15px; margin-top: 10%;" onclick="window.location.href = '/'">Sign Out</button></a></div>
+</body>
+</html>

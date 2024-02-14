@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+</head>
+
+<body>
+    <h1 class="sph1" style="margin-bottom: 3%;">Sell Summary</h1>
+    <div class="center">
+        <img src="{{ url_for('static', filename='pic.jpg')}}" alt="pic">
+    </div>
+
+    <h1 class="sph1" style="margin: 1%;">Top Selling Items</h1>
+    <div class="center">
+        <table class="table"  >
+            <thead class="color" style="font-size: 20px;">
+                <th>Item Name</th>
+                <th>Category Name</th>
+            </thead>
+            <tbody class="color2" style="font-size: 17px;">
+                {% for item in l %}         
+                <tr><td><strong>{{ item[0] }}</strong></td><td>{{ item[1] }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  
+    <div class="center" style="margin: 3%;">
+        <button class="btn2" onclick="window.location.href = '/Manager/{{ code }}/Dashboard'">Go Back</button>
+    </div>
+
+</body>
+
+</html>

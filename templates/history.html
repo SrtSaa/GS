@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+</head>
+<body>
+    <div class="container5" style="margin: 3%; padding: 0px 20%;">
+        <div class="box2"><h1 class="sph1">Purchase History</h1></div>
+        <div class="box2"><a href="/Member/{{ code }}/Profile"><button class="btn2">Go Back</button></a></div>
+    </div>
+    {% for date in d %}
+        <div class="center"><h2>{{ date }}</h2></div>
+        <div class="center">
+            <table class="table" style="font-size: 17px;">
+                <thead class="color">
+                    <th>Item Name</th>
+                    <th>Category Name</th>
+                    <th>Item Quantity</th>
+                    <th>Item Price</th>
+                    <th>Purchase Quantity</th>
+                    <th>Total Price</th>
+                </thead>
+                <tbody>
+                    {% for item in d[date] %}
+                        <tr class="color2">
+                            <td><strong>{{ item.i_name }}</strong></td>
+                            <td>{{ item.cat_name }}</td>
+                            <td style="text-align: center;">{{ item.quantity }} {{ item.unit }}</td>
+                            <td style="text-align: center;">{{ item.price }}</td>
+                            <td style="text-align: center;">{{ item.selling_quantity }}</td>
+                            <td class="price" style="text-align: center;">{{ item.profit }}</td>
+                        </tr> 
+                    {% endfor %}
+                    <tr style="text-align: center; font-size: 20px; font-weight: bold;"><td colspan="5" class="color">Total Amount</td><td class="totalPrice color2" style="background-color: aquamarine;"></td></tr>
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+    <script src="{{ url_for('static', filename='history.js')}}"></script>
+</body>
+</html>

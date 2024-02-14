@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <style>
+        h1 {
+            margin-top: 75px;
+            text-align: center;
+            font-size: 35px;
+        }
+        h3 {
+            text-align: center;
+            font-size: 20px;
+        }
+        input[type=text], input[type=password]{
+            border: none;
+            background-color: #d7dfdd;
+        }
+</style>
+    </style>
+</head>
+
+<body style="background-color: #cd733f ;">
+    <h1 class="welcome-heading">Welcome to Grocery Bazar</h1>
+    <div class="container4">
+        <div class="box">
+            <h3 style="margin-top: 5%;">Manager Login</h3>
+            <form action="/" name="form" onsubmit="return validateForm(name)" method="POST">
+                <input type="hidden" name="type" value="Manager">
+                <div id="email">
+                    {% if data == 0 or data == 1 %}
+                    <strong>Email: </strong><input type="text" name="femail" value= "{{ AE }}" required><br>
+                    {% else %}
+                    <strong>Email: </strong><input type="text" name="femail" placeholder= "{{ AE }}" required><br>
+                    {% endif %}
+                    <b><span class="formerror"></span></b><br>
+                </div>
+                <div id="pass">
+                    {% if data == 0 or data == 1 %}
+                    <strong>Password: </strong><input type="password" name="fpass" value= "{{ AP }}" required><br>
+                    {% else %}
+                    <strong>Password: </strong><input type="password" name="fpass" placeholder= "{{ AP }}" required><br>
+                    {% endif %}
+                    <b><span class="formerror"></span></b><br>
+                </div>
+                <input class="btn3" style="width: 80px;" type="submit" value="Submit"><br><br>
+            </form>
+            <div id="test"><b><div class="formerror" style="text-align: center;"></div></b></div>
+        </div>
+
+        <div class="box">
+            <h3>Customer Login</h3>
+            <form action="/" name="form2" onsubmit="return validateForm(name)" method="POST">
+                <input type="hidden" name="type" value="Customer">
+                <div id="email2">
+                    {% if data2 == 0 or data2 == 1 or data2 == 2 %}
+                    <strong>Email: </strong><input type="text" name="femail" value= "{{ UE }}" required><br>
+                    {% else %}
+                    <strong>Email: </strong><input type="text" name="femail" placeholder= "{{ UE }}" required><br>
+                    {% endif %}
+                    <b><span class="formerror"></span></b><br>
+                </div>
+
+                <div id="pass2">
+                    {% if data2 == 0 or data2 == 1 or data2 == 2 %}
+                    <strong>Password: </strong><input type="password" name="fpass" value= "{{ UP }}" required><br>
+                    {% else %}
+                    <strong>Password: </strong><input type="password" name="fpass" placeholder= "{{ UP }}" required><br>
+                    {% endif %}
+                    <b><span class="formerror"></span></b><br>
+                </div>
+                <input class="btn3" style="width: 80px;" type="submit" value="Submit" onclick="clearStorage()"><br><br>
+            </form>
+            <div id="test2"><b><div class="formerror" style="text-align: center;"></div></b></div>
+            <!-- <div><a href="/Register" style="color: rgba(89, 235, 186, 0.853);">New Member? Register!</a></div><br><br> -->
+            <div><a href="/Register">New Member? Register!</a></div><br><br>
+        </div>
+    </div>
+</body>
+<script src="{{ url_for('static', filename='validateForm.js')}}"></script>
+{% if data == 0 %}
+    <script>seterror("test","Unauthorized email or username!<br><br>");</script>
+{% elif data == 1 %}
+    <script>seterror("test","Invalid Password!<br><br>");</script>
+{% endif %}
+
+{% if data2 == 0 %}
+    <script>seterror("test2","Unauthorized email or username!<br><br>");</script>
+{% elif data2 == 1 %}
+    <script>seterror("test2","Invalid Password!<br><br>");</script>
+{% endif %}
+
+</html>

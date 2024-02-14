@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+</head>
+
+
+<body>
+    <h1 class="sph1">Register New Member</h1>
+
+    <div class="center">
+        <form action="/Register" name="form" onsubmit="return validateForm2(name)" method="POST">
+            <table style="font-size: 20px;">
+                <tbody>
+                    <tr>
+                        <td><strong>Username:</strong></td>
+                        <td><input type="text" name="uname" placeholder="Enter Username" value="{{ uname }}"></td>
+                    </tr>
+                    <tr style="font-size: small;"><td></td><td><div id="uname" class="center"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>First Name:</strong></td>
+                        <td><input type="text" name="fname" placeholder="Enter First Name" value="{{ fname }}" required></td>
+                    </tr>
+                    <tr><td></td></tr>
+
+                    <tr>
+                        <td><strong>Last Name:</strong></td>
+                        <td><input type="text" name="lname" placeholder="Enter Last Name" value="{{ lname }}"></td>
+                    </tr>
+                    <tr><td></td></tr>
+
+                    <tr>
+                        <td><strong>Gender:</strong></td>
+                        <td>
+                            <input type="radio" name="gen" value="M" required>Male
+                            <input type="radio" name="gen" value="F">Female
+                            <input type="radio" name="gen" value="O">Other
+                        </td>
+                    </tr>
+                    <tr><td></td></tr>
+
+                    <tr>
+                        <td><strong>Date of Birth:</strong></td>
+                        <td><input type="date" name="dob" placeholder="Enter DOB" value="{{ dob }}"></td>
+                    </tr>
+                    <tr style="font-size: small;"><td></td><td><div id="dob" class="center"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>Mobile:</strong></td>
+                        <td><input type="text" name="mobile" placeholder="Enter Mobile No" value="{{ mobile }}" required></td>
+                    </tr>
+                    <tr style="font-size: small;"><td></td><td><div id="mobile" class="center"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>Email:</strong></td>
+                        <td><input type="email" name="femail" placeholder="Enter Email Id" value="{{ email }}" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="email"><b><span class="formerror"></span></b></div></td></tr>
+                    
+                    <tr>
+                        <td><strong>Password:</strong></td>
+                        <td><input type="password" name="fpass" placeholder="Enter Password" required></td>
+                    </tr>
+                    <tr style="font-size: small;"><td></td><td><div id="pass" class="center"><b><span class="formerror"></span></b></div></td></tr>
+                    
+                    <tr>
+                        <td><strong>Confirm Password:</strong></td>
+                        <td><input type="password" name="fcpass" placeholder="Re-enter Password" required></td>
+                    </tr>
+                    <tr style="font-size: small;"><td></td><td><div id="fcpass" class="center"><b><span class="formerror"></span></b></div></td></tr>
+                </tbody>
+            </table>
+            
+            <div class="center"><div><button class="btn2" type="submit" style="font-size: 20px; margin: 5%;">Submit</button></div></div><br>
+            
+        </form>
+    </div>
+
+    <div id="test" class="center"><b><div class="formerror" style="text-align: center;"></div></b></div>
+
+    <div class="center"><button class="btn2" onclick="window.location.href = '/'">Go Back</button></div><br><br>
+    
+    
+
+    
+    <script src="{{ url_for('static', filename='validateForm.js')}}"></script>
+    {% if f == 1 %}
+    <script>seterror("uname","Use Different Username!");</script>
+    {% elif f==2 %}
+    <script>seterror("mobile","Mobile Number is Already Registered!");</script>
+    {% elif f==3 %}
+    <script>seterror("email","Email ID is Already Registered!");</script>
+    {% endif %}
+</body>
+</html>

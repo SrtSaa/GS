@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+</head>
+
+<body>
+    <h1 class="sph1">Add Item</h1>
+    <div class="center">
+        <form action="/Manager/{{ code }}/Inventory/Item/Add" name="form" onsubmit="return validateForm3(name)" method="POST">
+            <table class="table" style="font-size: 17px;">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Item Name:</strong></td>
+                        <td><input type="text" name="iname" placeholder="Enter Item Name" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="iname"><b><span class="formerror"></span></b></div></td></tr>
+                    <tr>
+                        <td><strong>Category Name:</strong></td>
+                        <td>
+                            <select id="cname" name="cname">
+                                {% for k in catgs %}
+                                    <option value="{{ k.cat_id }} {{ k.cat_name }}">{{ k.cat_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td><strong>Quantity:</strong></td>
+                        <td><input type="number" min="0" name="qty" id="qty" placeholder="Enter Quantity" required></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td><strong>Unit:</strong></td>
+                        <td><input type="text" name="unit" placeholder="Enter Unit" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="unit"><b><span class="formerror"></span></b></div></td></tr>
+                    <tr>
+                        <td><strong>Price:</strong></td>
+                        <td><input type="number" min="0" name="price" id="price" placeholder="Enter Price" required></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td><strong>Stock:</strong></td>
+                        <td><input type="number" min="0" name="stock" id="stock" placeholder="Enter Stock" required></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td><strong>Mfg Date:</strong></td>
+                        <td><input type="date" name="mfg" id="mfg" required></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td><strong>Exp Date:</strong></td>
+                        <td><input type="date" name="exp" id="exp" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="date"><b><span class="formerror"></span></b></div></td></tr>
+                </tbody>
+            </table>
+            <br><br>
+            <div class="center"><div><button class="btn2">Submit</button></div></div>
+        </form>
+    </div>
+
+
+    <div class="center" style="margin: 3%;">
+        <button class="btn2" onclick="window.location.href = '/Manager/{{ code }}/Dashboard'">Go Back</button>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='validateForm.js')}}"></script>
+</body>
+
+</html>
